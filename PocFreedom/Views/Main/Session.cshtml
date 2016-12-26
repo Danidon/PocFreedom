@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Session";
+}
+
+<h2>Open Session With:</h2>
+
+<div class="list-group" id="users">
+</div>
+
+<script>
+    var users = @Html.Action("GetConnectedUsers");
+    for(var username in users){
+        console.log(username);
+        $("#users").append('<button type="button" class="list-group-item" value="'+users[username]['ip']+'">'+ username +'</button>')
+    }
+</script>
+
