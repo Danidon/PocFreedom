@@ -21,7 +21,7 @@ namespace PocFreedom.Controllers
         {
             if(Main.registerUser(username, password, /*Request.UserHostAddress*/"127.0.0.1"))
                 return View("Session");
-            return View("Index");
+            return View("Index"); 
         }
 
         public ContentResult GetConnectedUsers()
