@@ -7,18 +7,18 @@ namespace PocFreedom
 {
     public class Main
     {
-        private static Dictionary<string, UserInfo> users = new Dictionary<string, UserInfo>();
+        private static Dictionary<string, Client> users = new Dictionary<string, Client>();
 
         public static bool registerUser(string username,string password, string ip)
         {
             if (username != null && users.ContainsKey(username))
                 return false;
             else
-                users[username] = new UserInfo(username, password, ip);
+                users[username] = new Client(new UserInfo(username, password, ip));
             return true;
         }
 
-        public static Dictionary<string, UserInfo> getConnectedUsers()
+        public static Dictionary<string, Client> getConnectedUsers()
         {
             return users;
         }

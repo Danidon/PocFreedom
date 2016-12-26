@@ -5,14 +5,22 @@
 
 <h2>Open Session With:</h2>
 
-<div class="list-group" id="users">
-</div>
+<form action=@Url.Action("SendSessionRequest") class="form-horizontal" method="post" id="users">
+    
+    <div class="form-group">
+        <div class="col-md-10">
+            <input class="form-control" id="recieverName" name="recieverName" type="submit">
+        </div>
+    </div>
+</form>
 
 <script>
+    var current_user = "@ViewBag.username";
     var users = @Html.Action("GetConnectedUsers");
+    $("#users").append('<input class="form-control" id="initiatorName" name="initiatorName" type="hidden" value='+current_user+'>');
     for(var username in users){
-        console.log(username);
-        $("#users").append('<button type="button" class="list-group-item" value="'+users[username]['ip']+'">'+ username +'</button>')
+        if(username != current_user)
+            $("#users").append('<div class="form-group"><div class="col-md-10"><input class="form-control" id="recieverName" name="recieverName" type="submit" value="\''+username+'\'"></div></div>')
     }
 </script>
 

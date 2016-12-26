@@ -17,10 +17,13 @@ namespace PocFreedom.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string username,string password)
+        public ActionResult Register(string username, string password)
         {
-            if(Main.registerUser(username, password, /*Request.UserHostAddress*/"127.0.0.1"))
+            if (Main.registerUser(username, password, /*Request.UserHostAddress*/"127.0.0.1"))
+            {
+                ViewBag.username = username;
                 return View("Session");
+            }
             return View("Index"); 
         }
 
@@ -29,6 +32,16 @@ namespace PocFreedom.Controllers
             
             return Content(new JavaScriptSerializer().Serialize(Main.getConnectedUsers()));
         }
+
+        public ContentResult SendSessionRequest(string initiatorName, string recieverName)
+        {
+            var users = Main.getConnectedUsers();
+            var initiator = users[initiatorName];
+            var reciever = users[recieverName];
+            reciever.AddSessionRequest(new SessionRequest(initiator));
+            return Content(new JavaScriptSerializer().Serialize(Main.getConnectedUsers()));
+        }
+
     }
 
 
